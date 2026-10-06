@@ -1,0 +1,6 @@
+{
+  "name": "رؤية التعليم | Education Visio",
+  "description": "منصة رؤية التعليم لخدمات الطلاب والأكاديمية - حلول أكاديمية احترافية، أبحاث، تحليل بيانات، عروض تقديمية، ومتجر إلكتروني متكامل.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
