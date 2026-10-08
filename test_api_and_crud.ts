@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import http from 'http';
 import { app } from './src/server/app.js';
 import { db } from './src/server/db.js';
@@ -41,7 +42,10 @@ async function runTests() {
     const goodLoginRes = await fetch(`${baseUrl}/api/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'admin@educationvision.com', password: 'AdminPassword2026!' })
+      body: JSON.stringify({
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASSWORD,
+})
     });
     const goodLoginData = await goodLoginRes.json();
     assert(goodLoginRes.status === 200 && goodLoginData.success && typeof goodLoginData.token === 'string', 'POST /api/login with valid credentials returns 200 and JWT');
