@@ -1,10 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { getStore } from '@netlify/blobs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 
 export interface Service {
   id: string;
@@ -272,11 +270,21 @@ const INITIAL_SERVICES: Service[] = [
 ];
 
 // Determine serverless vs container environment
-const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
-const DB_DIR = isServerless ? '/tmp' : path.resolve(__dirname, '../../data');
-const DB_FILE = path.join(DB_DIR, 'services.json');
-const LEGACY_DB_FILE = path.resolve(__dirname, '../../data/database.json');
+const isServerless = Boolean(
+  process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME
+);
 
+const DB_DIR = isServerless
+  ? '/tmp'
+  : path.resolve(process.cwd(), 'data');
+
+const DB_FILE = path.join(DB_DIR, 'services.json');
+
+const LEGACY_DB_FILE = path.resolve(
+  process.cwd(),
+  'data',
+  'database.json'
+);
 class SimpleServicesDatabase {
   private services: Service[] = [];
   private isLoaded = false;
